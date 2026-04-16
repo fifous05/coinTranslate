@@ -1,0 +1,10 @@
+# Java
+target/
+*.class
+
+# IntelliJ
+.idea/
+*.iml
+
+# Node (caso use depois)
+node_modules/
