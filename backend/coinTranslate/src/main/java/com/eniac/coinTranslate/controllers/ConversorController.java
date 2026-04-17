@@ -1,5 +1,6 @@
-package com.eniac.coinTranslate;
+package com.eniac.coinTranslate.controllers;
 
+import com.eniac.coinTranslate.services.CurrencyService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
