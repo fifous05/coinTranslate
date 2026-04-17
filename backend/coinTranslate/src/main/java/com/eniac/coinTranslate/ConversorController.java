@@ -5,29 +5,22 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
+
 public class ConversorController {
 
-    @GetMapping("/converter")
-    public double converter(
-            @RequestParam double valor,
-            @RequestParam String moeda) {
+        private final CurrencyService currencyService;
 
-        double cotacao = 0;
-
-        switch (moeda.toLowerCase()) {
-            case "dolar":
-                cotacao = 5.0;
-                break;
-            case "euro":
-                cotacao = 5.5;
-                break;
-            case "libra":
-                cotacao = 6.3;
-                break;
-            default:
-                return 0;
+        public ConversorController(CurrencyService currencyService) {
+                this.currencyService = currencyService;
         }
 
-        return valor / cotacao;
-    }
+        @GetMapping("/converter")
+        public double converter(
+                @RequestParam double valor,
+                @RequestParam String moeda) {
+
+                double cotacao = currencyService.getRate(moeda);
+
+                return valor * cotacao;
+        }
 }

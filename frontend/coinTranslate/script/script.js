@@ -7,5 +7,9 @@ function converter() {
         .then(data => {
             document.getElementById("resultado").innerText =
                 "Resultado: " + data;
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Erro ao conectar com o backend");
         });
-}
+    }
