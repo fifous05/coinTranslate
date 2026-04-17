@@ -1,6 +1,6 @@
 body{
     margin: 0px;
-    background-color: rgb(255, 255, 255);
+    background-color: lab(100% 0.01 -0.01);
     font-family: Arial, Helvetica, sans-serif;
     display: grid;
     place-items: center;
@@ -12,12 +12,13 @@ body{
     text-align: center;
     width: 500px;
     background-color: rgb(221, 221, 221);
-    padding: 20px;
-    border-radius: 10px;
+    padding: 25px;
+    border-radius: 50px;
     height: 200px;
-    box-shadow: 1px 15px 20px rgba(0, 0, 0, 0.285);
+    box-shadow: 1px 15px 20px rgba(168, 18, 223, 0.429);
 }
 
 h1{
     color: rgb(0, 0, 0);
 }
+
