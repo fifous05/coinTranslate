@@ -2,6 +2,7 @@ package com.eniac.coinTranslate.controllers;
 
 import com.eniac.coinTranslate.services.CurrencyService;
 import org.springframework.web.bind.annotation.*;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -16,12 +17,17 @@ public class ConversorController {
         }
 
         @GetMapping("/converter")
-        public double converter(
+        public Map<String, Object> converter(
                 @RequestParam double valor,
                 @RequestParam String moeda) {
 
                 double cotacao = currencyService.getRate(moeda);
 
-                return valor * cotacao;
+                return Map.of(
+                        "valor_original", valor,
+                        "moeda", moeda,
+                        "cotacao", cotacao,
+                        "resultado", valor * cotacao
+                );
         }
 }

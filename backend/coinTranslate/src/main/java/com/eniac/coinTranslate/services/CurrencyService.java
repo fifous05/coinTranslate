@@ -9,22 +9,36 @@ import java.util.Map;
 public class CurrencyService {
 
     public double getRate(String moeda) {
-        String url = "https://api.exchangerate-api.com/v4/latest/BRL";
+        try {
+            String url = "https://api.exchangerate-api.com/v4/latest/BRL";
 
-        RestTemplate restTemplate = new RestTemplate();
-        Map response = restTemplate.getForObject(url, Map.class);
+            RestTemplate restTemplate = new RestTemplate();
+            Map response = restTemplate.getForObject(url, Map.class);
 
-        Map rates = (Map) response.get("rates");
+            if (response == null) {
+                throw new RuntimeException("Resposta da API é null");
+            }
 
-        switch (moeda.toLowerCase()) {
-            case "dolar":
-                return Double.parseDouble(rates.get("USD").toString());
-            case "euro":
-                return Double.parseDouble(rates.get("EUR").toString());
-            case "libra":
-                return Double.parseDouble(rates.get("GBP").toString());
-            default:
-                return 0;
+            Map rates = (Map) response.get("rates");
+
+            if (rates == null) {
+                throw new RuntimeException("Rates não encontrados");
+            }
+
+            switch (moeda.toLowerCase()) {
+                case "dolar":
+                    return Double.parseDouble(rates.get("USD").toString());
+                case "euro":
+                    return Double.parseDouble(rates.get("EUR").toString());
+                case "libra":
+                    return Double.parseDouble(rates.get("GBP").toString());
+                default:
+                    throw new RuntimeException("Moeda inválida");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // 👈 MOSTRA O ERRO REAL
+            return 0;
         }
     }
 }
