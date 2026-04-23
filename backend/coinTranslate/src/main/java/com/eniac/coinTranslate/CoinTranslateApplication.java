@@ -1,30 +1,12 @@
 package com.eniac.coinTranslate;// mantenha o seu package!
 
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.Map;
+@SpringBootApplication
+public class CoinTranslateApplication {
 
-@Service
-public class CurrencyService {
-
-	public double getRate(String moeda) {
-		String url = "https://api.exchangerate-api.com/v4/latest/BRL";
-
-		RestTemplate restTemplate = new RestTemplate();
-		Map response = restTemplate.getForObject(url, Map.class);
-
-		Map rates = (Map) response.get("rates");
-
-		switch (moeda.toLowerCase()) {
-			case "dolar":
-				return Double.parseDouble(rates.get("USD").toString());
-			case "euro":
-				return Double.parseDouble(rates.get("EUR").toString());
-			case "libra":
-				return Double.parseDouble(rates.get("GBP").toString());
-			default:
-				return 0;
-		}
+	public static void main(String[] args) {
+		SpringApplication.run(CoinTranslateApplication.class, args);
 	}
 }
