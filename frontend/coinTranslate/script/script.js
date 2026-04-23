@@ -3,10 +3,10 @@ function converter() {
     let moeda = document.getElementById("moeda").value;
 
     fetch(`http://localhost:8080/api/converter?valor=${valor}&moeda=${moeda}`)
-        .then(res => res.text())
+        .then(res => res.json())
         .then(data => {
             document.getElementById("resultado").innerText =
-                "Resultado: " + data;
+    `R$ ${data.valor_original} → ${data.resultado} (${data.moeda})`;
         })
         .catch(err => {
             console.error(err);
