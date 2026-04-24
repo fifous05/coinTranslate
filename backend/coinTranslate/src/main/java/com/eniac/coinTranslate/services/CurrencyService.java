@@ -26,6 +26,8 @@ public class CurrencyService {
             }
 
             switch (moeda.toLowerCase()) {
+                case "real":
+                    return 1.0;
                 case "dolar":
                     return Double.parseDouble(rates.get("USD").toString());
                 case "euro":

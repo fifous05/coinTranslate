@@ -19,15 +19,22 @@ public class ConversorController {
         @GetMapping("/converter")
         public Map<String, Object> converter(
                 @RequestParam double valor,
-                @RequestParam String moeda) {
+                @RequestParam String origem,
+                @RequestParam String destino) {
 
-                double cotacao = currencyService.getRate(moeda);
+                double taxaOrigem = currencyService.getRate(origem);
+                double taxaDestino = currencyService.getRate(destino);
+
+                // converte para BRL base e depois para destino
+                double valorEmBRL = valor / taxaOrigem;
+                double resultado = valorEmBRL * taxaDestino;
 
                 return Map.of(
                         "valor_original", valor,
-                        "moeda", moeda,
-                        "cotacao", cotacao,
-                        "resultado", valor * cotacao
+                        "origem", origem,
+                        "destino", destino,
+                        "resultado", resultado
                 );
         }
-}
+        }
+
